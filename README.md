@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SETUP COMMANDS — QR Attendance App
 
 > **Target:** First-year students | **Expo SDK:** 54 | **Expo Go:** 54.0.8
@@ -55,3 +56,6 @@ Scan QR code with Expo Go. Or press `W` for web.
 | QR won't scan | Phone + computer on same WiFi |
 | White screen | Wait 10s, or shake → Reload |
 | TypeScript errors | Run `npx tsc --noEmit` |
+=======
+# ATOMYX
+>>>>>>> 01ee4d29e28745ff7a9488cdfdb367d1a4d1eac5
