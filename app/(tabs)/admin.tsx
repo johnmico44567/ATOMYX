@@ -61,20 +61,20 @@ const SECTIONS: { id: AdminSection; label: string; icon: keyof typeof Ionicons.g
 ];
 
 const ADMIN_THEME = {
-  background: '#0C0A12',
-  sidebar: '#08070D',
-  surface: '#171322',
-  surfaceRaised: '#201A30',
-  border: '#30283F',
-  text: '#F7F4FF',
-  muted: '#A49CB5',
-  accent: '#9A6BFF',
-  accentStrong: '#7650D8',
-  accentTint: 'rgba(154,107,255,0.15)',
-  cyan: '#58C9E8',
-  success: '#52D5A0',
-  warning: '#F4B454',
-  danger: '#FF718B',
+  background: '#050B1E',
+  sidebar: '#030614',
+  surface: '#0D1836',
+  surfaceRaised: '#111F42',
+  border: 'rgba(94,180,255,0.18)',
+  text: '#F2F7FF',
+  muted: '#A9BDDD',
+  accent: '#2E9BFF',
+  accentStrong: '#1A4FD6',
+  accentTint: 'rgba(46,155,255,0.15)',
+  cyan: '#4DE3FF',
+  success: '#3DDC97',
+  warning: '#FFB84D',
+  danger: '#FF6B8A',
 };
 
 const COLORS = {
@@ -137,7 +137,7 @@ export default function AdminScreen() {
   const [eventVenueDraft, setEventVenueDraft] = useState('');
   const [eventDescriptionDraft, setEventDescriptionDraft] = useState('');
   const [eventSettingsDraft, setEventSettingsDraft] = useState({
-    gracePeriodMinutes: 0,
+    gracePeriodMinutes: 5,
     lateReasonEnabled: false,
     zoneEnabled: false,
     zoneLat: null as number | null,
@@ -413,7 +413,7 @@ export default function AdminScreen() {
     setEventVenueDraft('');
     setEventDescriptionDraft('');
     setEventSettingsDraft({
-      gracePeriodMinutes: 0,
+      gracePeriodMinutes: 5,
       lateReasonEnabled: false,
       zoneEnabled: false,
       zoneLat: null,
@@ -484,7 +484,7 @@ export default function AdminScreen() {
           <View style={styles.brandLockup}>
             <View style={styles.brandMark}><Ionicons name="sync" size={21} color="#FFFFFF" /></View>
             <View>
-              <Text style={styles.brandName}>SYNCRA</Text>
+              <Text style={styles.brandName}>ATOMYX</Text>
               <Text style={styles.brandCaption}>ADMIN CONSOLE</Text>
             </View>
           </View>
@@ -533,7 +533,7 @@ export default function AdminScreen() {
           <View style={styles.brandLockup}>
             <View style={styles.brandMark}><Ionicons name="sync" size={19} color="#FFFFFF" /></View>
             <View>
-              <Text style={styles.brandName}>SYNCRA</Text>
+              <Text style={styles.brandName}>ATOMYX</Text>
               <Text style={styles.brandCaption}>ADMIN CONSOLE</Text>
             </View>
           </View>
@@ -573,7 +573,7 @@ export default function AdminScreen() {
         <EntranceView>
           <View style={[styles.header, !isDesktop && styles.mobilePageHeader]}>
             <View>
-              <Text style={styles.eyebrow}>SYNCRA / ADMINISTRATION</Text>
+              <Text style={styles.eyebrow}>ATOMYX / ADMINISTRATION</Text>
               <Text style={styles.title}>{sectionTitle(section)}</Text>
               <Text style={styles.pageSubtitle}>{sectionSubtitle(section)}</Text>
             </View>
@@ -1042,7 +1042,7 @@ export default function AdminScreen() {
           <View style={[styles.mobileMenu, { paddingTop: insets.top + SPACE.md, paddingBottom: insets.bottom + SPACE.md }]}>
             <View style={styles.mobileMenuHeader}>
               <View>
-                <Text style={styles.brandName}>SYNCRA</Text>
+                <Text style={styles.brandName}>ATOMYX</Text>
                 <Text style={styles.brandCaption}>ADMIN CONSOLE</Text>
               </View>
               <Pressable

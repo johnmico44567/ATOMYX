@@ -114,9 +114,9 @@ export default function NotificationsScreen() {
       >
         <View style={styles.header}>
           <View style={styles.headerCopy}>
-            <Text style={styles.eyebrow}>{teacherMode ? 'TEACHER WORKSPACE' : 'ACCOUNT UPDATES'}</Text>
-            <Text style={styles.title}>{teacherMode ? 'Recovery Requests' : 'Notifications'}</Text>
-            <Text style={styles.subtitle}>{teacherMode ? 'Review attendance requests for your events.' : 'Your latest SYNCRA account updates.'}</Text>
+            <Text style={styles.eyebrow}>{teacherMode ? 'ATOMYX · STUDIO REVIEW' : 'ATOMYX · SIGNALS'}</Text>
+            <Text style={styles.title}>{teacherMode ? 'Recovery Requests' : 'Signals'}</Text>
+            <Text style={styles.subtitle}>{teacherMode ? 'Review attendance requests for your events.' : 'Your latest account updates and campus notices.'}</Text>
           </View>
           <View style={styles.headerIcon}><Ionicons name={teacherMode ? 'document-text-outline' : 'notifications-outline'} size={21} color={COLORS.primary} /></View>
         </View>
@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
   requestStatus: { fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.textSecondary, fontSize: 11, letterSpacing: 0.5, marginTop: 10 },
   requestActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 13 },
   reviewButton: { minHeight: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingHorizontal: 12, borderRadius: 13, borderWidth: 1 },
-  rejectButton: { backgroundColor: 'rgba(201,79,101,0.10)', borderColor: 'rgba(201,79,101,0.24)' },
-  approveButton: { backgroundColor: 'rgba(37,136,117,0.10)', borderColor: 'rgba(37,136,117,0.24)' },
+  rejectButton: { backgroundColor: 'rgba(255,107,138,0.08)', borderColor: 'rgba(255,107,138,0.26)' },
+  approveButton: { backgroundColor: 'rgba(61,220,151,0.08)', borderColor: 'rgba(61,220,151,0.26)' },
   rejectText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.danger, fontSize: 12 },
   approveText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.success, fontSize: 12 },
   disabledButton: { opacity: 0.55 },

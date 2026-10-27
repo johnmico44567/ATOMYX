@@ -99,8 +99,8 @@ export default function HistoryScreen() {
       <View style={styles.content}>
         <View style={styles.pageHeader}>
           <View style={styles.headerCopy}>
-            <Text style={styles.eyebrow}>{role === 'teacher' ? 'TEACHER VIEW' : 'MY ACTIVITY'}</Text>
-            <Text style={styles.title}>Attendance history</Text>
+            <Text style={styles.eyebrow}>{role === 'teacher' ? 'ATOMYX · TEACHER LEDGER' : 'ATOMYX · ACTIVITY LEDGER'}</Text>
+            <Text style={styles.title}>Attendance ledger</Text>
           </View>
           {role === 'student' ? (
             <Pressable style={styles.headerIcon} onPress={() => router.push('/recovery')} accessibilityRole="button">
@@ -225,7 +225,7 @@ export default function HistoryScreen() {
           <View accessibilityRole="alert" style={styles.confirmCard}>
             <View style={styles.confirmIcon}><Ionicons name="eye-off-outline" size={23} color={COLORS.danger} /></View>
             <Text style={styles.confirmTitle}>Clear your history?</Text>
-            <Text style={styles.confirmText}>This hides your attendance entries from your personal History view on this device. Official attendance records and teacher reports will not be changed.</Text>
+            <Text style={styles.confirmText}>This hides your attendance entries from your personal Ledger view on this device. Official attendance records and teacher reports will not be changed.</Text>
             {clearError && <Text accessibilityRole="alert" style={styles.confirmError}>{clearError}</Text>}
             <View style={styles.confirmActions}>
               <Pressable accessibilityRole="button" disabled={clearingHistory} onPress={() => setConfirmClear(false)} style={styles.cancelButton}>
@@ -269,22 +269,22 @@ const styles = StyleSheet.create({
   headerCopy: { flex: 1 },
   title: { ...TYPOGRAPHY.screenTitle, fontFamily: TYPOGRAPHY.displayFontFamily, color: COLORS.textPrimary, marginTop: 3 },
   headerIcon: { width: 48, height: 48, borderRadius: 24, backgroundColor: COLORS.glassStrong, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: COLORS.champagneBorder },
-  clearHistoryButton: { alignSelf: 'flex-end', minHeight: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, paddingHorizontal: 15, borderRadius: 24, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: 'rgba(201,79,101,0.35)', marginTop: -8, marginBottom: 13 },
+  clearHistoryButton: { alignSelf: 'flex-end', minHeight: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, paddingHorizontal: 15, borderRadius: 18, backgroundColor: 'rgba(255,107,138,0.08)', borderWidth: 1, borderColor: 'rgba(255,107,138,0.32)', marginTop: -8, marginBottom: 13 },
   clearHistoryDisabled: { opacity: 0.45 },
   clearHistoryPressed: { transform: [{ scale: 0.97 }] },
   clearHistoryText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 15, color: COLORS.danger },
-  summaryPanel: { minHeight: 176, borderRadius: 26, backgroundColor: COLORS.primary, padding: 17, marginBottom: 17, overflow: 'hidden', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  summaryPanelTeacher: { backgroundColor: '#443EB4' },
+  summaryPanel: { minHeight: 176, borderRadius: 26, backgroundColor: 'rgba(13,24,54,0.88)', borderWidth: 1, borderColor: COLORS.glassBorder, padding: 17, marginBottom: 17, overflow: 'hidden', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  summaryPanelTeacher: { borderColor: 'rgba(124,156,255,0.3)' },
   summaryCopy: { flex: 1, paddingRight: 7 },
-  summaryEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, color: '#FFFFFF', fontSize: 14, letterSpacing: 0.2 },
-  summaryTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, color: '#FFFFFF', fontSize: 20, lineHeight: 27, marginTop: 7 },
-  summaryCaption: { fontFamily: TYPOGRAPHY.fontFamily, color: '#FFFFFF', fontSize: 14, lineHeight: 20, marginTop: 5 },
-  summaryNumbers: { minWidth: 96, minHeight: 112, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.22)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.42)', alignItems: 'center', justifyContent: 'center', gap: 5 },
+  summaryEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.cyan, fontSize: 11, letterSpacing: 1.5 },
+  summaryTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, color: COLORS.textPrimary, fontSize: 20, lineHeight: 27, marginTop: 7 },
+  summaryCaption: { fontFamily: TYPOGRAPHY.fontFamily, color: COLORS.textSecondary, fontSize: 13, lineHeight: 20, marginTop: 5 },
+  summaryNumbers: { minWidth: 96, minHeight: 112, borderRadius: 20, backgroundColor: 'rgba(3,7,22,0.66)', borderWidth: 1, borderColor: 'rgba(77,227,255,0.22)', alignItems: 'center', justifyContent: 'center', gap: 5 },
   summaryNumberBlock: { alignItems: 'center' },
-  summaryNumber: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 19, lineHeight: 22, color: '#FFFFFF' },
-  summaryNumberLabel: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 14, color: '#FFFFFF' },
-  summaryDivider: { width: 48, height: 1, backgroundColor: 'rgba(255,255,255,0.25)' },
-  summaryDecoration: { position: 'absolute', right: 12, top: 11, width: 32, height: 32, borderRadius: 12, backgroundColor: 'rgba(255,255,255,0.12)', alignItems: 'center', justifyContent: 'center' },
+  summaryNumber: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 19, lineHeight: 22, color: COLORS.textPrimary },
+  summaryNumberLabel: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 12, color: COLORS.textSecondary },
+  summaryDivider: { width: 48, height: 1, backgroundColor: 'rgba(77,227,255,0.22)' },
+  summaryDecoration: { position: 'absolute', right: 12, top: 11, width: 32, height: 32, borderRadius: 12, backgroundColor: 'rgba(77,227,255,0.10)', alignItems: 'center', justifyContent: 'center' },
   loadingState: { alignItems: 'center', paddingVertical: SPACE.section },
   loadingText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 16, color: COLORS.textSecondary, marginTop: SPACE.sm },
   list: { paddingBottom: 116, flexGrow: 1 },
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   dateRail: { width: 43, alignItems: 'center', paddingTop: 15, marginRight: 8 },
   dateMonth: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, letterSpacing: 0.1, color: COLORS.primary },
   dateDay: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 16, color: COLORS.textPrimary, marginTop: 1 },
-  railLine: { width: 1, flex: 1, minHeight: 18, backgroundColor: '#D8DFF0', marginTop: 5 },
+  railLine: { width: 1, flex: 1, minHeight: 18, backgroundColor: 'rgba(77,227,255,0.22)', marginTop: 5 },
   card: { flex: 1, backgroundColor: COLORS.glassStrong, borderRadius: 23, padding: 15, marginBottom: 0, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: COLORS.shadow, shadowOpacity: 0.11, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 2 },
   cardTop: { flexDirection: 'row', alignItems: 'center' },
   eventIcon: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(217,185,138,0.12)', borderWidth: 1, borderColor: COLORS.champagneBorder, alignItems: 'center', justifyContent: 'center', marginRight: 12 },
@@ -323,9 +323,9 @@ const styles = StyleSheet.create({
   emptyIcon: { width: 68, height: 68, borderRadius: 34, backgroundColor: COLORS.champagneSoft, borderWidth: 1, borderColor: COLORS.champagneBorder, alignItems: 'center', justifyContent: 'center', marginBottom: SPACE.md },
   emptyTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 20, color: COLORS.textPrimary },
   emptyText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 16, lineHeight: 24, color: COLORS.textSecondary, textAlign: 'center', marginTop: 6 },
-  modalBackdrop: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: SPACE.lg, backgroundColor: 'rgba(17,31,68,0.42)' },
-  confirmCard: { width: '100%', maxWidth: 380, borderRadius: 26, padding: 22, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center' },
-  confirmIcon: { width: 54, height: 54, borderRadius: 19, backgroundColor: 'rgba(201,79,101,0.10)', alignItems: 'center', justifyContent: 'center', marginBottom: 13 },
+  modalBackdrop: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: SPACE.lg, backgroundColor: 'rgba(2,6,20,0.78)' },
+  confirmCard: { width: '100%', maxWidth: 380, borderRadius: 26, padding: 22, backgroundColor: '#0D1836', borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center' },
+  confirmIcon: { width: 54, height: 54, borderRadius: 19, backgroundColor: 'rgba(255,107,138,0.10)', alignItems: 'center', justifyContent: 'center', marginBottom: 13 },
   confirmTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 19, color: COLORS.textPrimary, textAlign: 'center' },
   confirmText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 16, lineHeight: 24, color: COLORS.textSecondary, textAlign: 'center', marginTop: 8 },
   confirmError: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 15, lineHeight: 22, color: COLORS.danger, textAlign: 'center', marginTop: 12 },

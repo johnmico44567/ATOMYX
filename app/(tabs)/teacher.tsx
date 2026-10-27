@@ -104,7 +104,7 @@ export default function TeacherScreen() {
   const [showDetailsQr, setShowDetailsQr] = useState(false);
   const [monitorEvents, setMonitorEvents] = useState<CloudEvent[]>([]);
   const [editingEventStatus, setEditingEventStatus] = useState<'active' | 'closed'>('active');
-  const [gracePeriodMinutes, setGracePeriodMinutes] = useState(0);
+  const [gracePeriodMinutes, setGracePeriodMinutes] = useState(5);
   const [lateReasonEnabled, setLateReasonEnabled] = useState(false);
   const [zoneEnabled, setZoneEnabled] = useState(false);
   const [zoneLatitude, setZoneLatitude] = useState('');
@@ -1119,7 +1119,7 @@ const styles = StyleSheet.create({
   teacherBannerTitle: { fontFamily: TYPOGRAPHY.displayFontFamily, fontSize: 23, lineHeight: 27, color: '#FFFFFF', letterSpacing: -0.35 },
   teacherBannerText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 16, lineHeight: 23, color: '#FFFFFF', marginTop: 7, maxWidth: 260 },
   teacherBannerArt: { position: 'absolute', right: 19, top: 47, width: 71, height: 71, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.15)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.32)', alignItems: 'center', justifyContent: 'center', transform: [{ rotate: '8deg' }] },
-  teacherBannerArtDot: { position: 'absolute', right: -7, top: -7, width: 25, height: 25, borderRadius: 10, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' },
+  teacherBannerArtDot: { position: 'absolute', right: -7, top: -7, width: 25, height: 25, borderRadius: 10, backgroundColor: COLORS.card, alignItems: 'center', justifyContent: 'center' },
   title: { ...TYPOGRAPHY.screenTitle, fontFamily: TYPOGRAPHY.displayFontFamily, color: COLORS.textPrimary, marginBottom: 3 },
   subtitle: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 16, color: COLORS.textSecondary, lineHeight: 24, marginBottom: SPACE.lg },
   formCard: { padding: 18, borderRadius: 26, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: COLORS.shadow, shadowOpacity: 0.09, shadowRadius: 18, shadowOffset: { width: 0, height: 7 }, elevation: 2 },

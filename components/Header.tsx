@@ -11,11 +11,11 @@ export default function Header({ title }: { title: string }) {
         <Image source={require('@/assets/images/icon.png')} style={styles.logo} contentFit="contain" />
       </View>
       <View style={styles.titleBlock}>
-        <Text style={styles.kicker}>SYNCRA</Text>
+        <Text style={styles.kicker}>ATOMYX</Text>
         <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.actionCircle}>
-        <Ionicons name="notifications-outline" size={19} color={COLORS.textPrimary} />
+        <Ionicons name="notifications-outline" size={19} color={COLORS.cyan} />
       </View>
     </View>
   );
@@ -32,37 +32,37 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: COLORS.primaryDeep,
+    backgroundColor: COLORS.darkSurfaceDeep,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.72)',
-    shadowColor: COLORS.shadow,
-    shadowOpacity: 0.14,
-    shadowRadius: 12,
+    borderColor: 'rgba(77,227,255,0.38)',
+    shadowColor: COLORS.primary,
+    shadowOpacity: 0.34,
+    shadowRadius: 16,
     shadowOffset: { width: 0, height: 5 },
-    elevation: 3,
+    elevation: 4,
   },
   logo: { width: 34, height: 34 },
   titleBlock: { flex: 1, marginLeft: SPACE.md },
   kicker: {
     ...TYPOGRAPHY.label,
     fontFamily: TYPOGRAPHY.displayFontFamily,
-    color: COLORS.champagne,
-    letterSpacing: 1.4,
+    color: COLORS.cyan,
+    letterSpacing: 2.4,
   },
   title: {
     fontFamily: TYPOGRAPHY.displayFontFamily,
-    fontSize: 19,
-    lineHeight: 23,
+    fontSize: 21,
+    lineHeight: 25,
     color: COLORS.textPrimary,
-    marginTop: 1,
+    marginTop: 2,
   },
   actionCircle: {
     width: 48,
     height: 48,
     borderRadius: RADIUS.pill,
-    backgroundColor: COLORS.glassStrong,
+    backgroundColor: COLORS.card,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,

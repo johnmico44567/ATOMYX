@@ -204,7 +204,7 @@ export async function saveAdminEvent(event: {
     p_venue: event.venue.trim(),
     p_description: event.description.trim(),
     p_event_status: event.eventStatus ?? 'active',
-    p_grace_period_minutes: event.gracePeriodMinutes ?? 0,
+    p_grace_period_minutes: event.gracePeriodMinutes ?? 5,
     p_late_reason_enabled: event.lateReasonEnabled ?? false,
     p_zone_enabled: event.zoneEnabled ?? false,
     p_zone_lat: event.zoneLat ?? null,

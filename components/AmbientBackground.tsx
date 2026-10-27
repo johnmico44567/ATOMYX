@@ -94,11 +94,11 @@ export default function AmbientBackground({
 }
 
 const styles = StyleSheet.create({
-  base: { ...StyleSheet.absoluteFillObject, backgroundColor: COLORS.background },
+  base: { ...StyleSheet.absoluteFillObject, backgroundColor: COLORS.backgroundDeep },
   orb: { position: 'absolute', borderRadius: 999 },
-  orbOne: { width: 220, height: 220, top: -120, right: -100, backgroundColor: 'rgba(49,95,232,0.06)' },
-  orbTwo: { width: 190, height: 190, bottom: 70, backgroundColor: 'rgba(155,141,235,0.08)' },
+  orbOne: { width: 220, height: 220, top: -120, right: -100, backgroundColor: 'rgba(46,155,255,0.16)' },
+  orbTwo: { width: 190, height: 190, bottom: 70, backgroundColor: 'rgba(77,227,255,0.13)' },
   orbTwoLeft: { left: -100 },
   orbTwoRight: { right: -100 },
-  orbThree: { width: 130, height: 130, top: '40%', right: -80, backgroundColor: 'rgba(56,175,167,0.05)' },
+  orbThree: { width: 130, height: 130, top: '40%', right: -80, backgroundColor: 'rgba(124,156,255,0.14)' },
 });

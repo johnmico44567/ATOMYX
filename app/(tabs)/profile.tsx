@@ -234,7 +234,7 @@ export default function ProfileScreen() {
         setCopiedId(true);
         setTimeout(() => setCopiedId(false), 1800);
       } else {
-        await Share.share({ message: profile.id, title: 'SYNCRA account ID' });
+        await Share.share({ message: profile.id, title: 'ATOMYX account ID' });
       }
     } catch (error) {
       setActionMessage({ text: error instanceof Error ? error.message : 'The account ID could not be copied.', isError: true });
@@ -292,7 +292,7 @@ export default function ProfileScreen() {
       <ScrollView contentContainerStyle={[styles.content, { paddingTop: Math.max(insets.top, SPACE.lg), paddingBottom: Math.max(insets.bottom, 16) + 112 }]} showsVerticalScrollIndicator={false}>
         <EntranceView>
         <View style={styles.pageHeader}>
-          <View><Text style={styles.eyebrow}>{isAdministrator === null ? 'ACCOUNT ACCESS' : isAdministrator ? 'SYNCRA ADMINISTRATOR' : profile?.role === 'teacher' ? 'TEACHER ACCOUNT' : 'STUDENT ACCOUNT'}</Text><Text style={styles.title}>My profile</Text></View>
+          <View><Text style={styles.eyebrow}>{isAdministrator === null ? 'ACCOUNT ACCESS' : isAdministrator ? 'ATOMYX ADMINISTRATOR' : profile?.role === 'teacher' ? 'TEACHER ACCOUNT' : 'STUDENT ACCOUNT'}</Text><Text style={styles.title}>My profile</Text></View>
           <View style={styles.headerIcon}><Ionicons name={isAdministrator ? 'shield-checkmark-outline' : profile?.role === 'teacher' ? 'school-outline' : 'person-outline'} size={21} color={COLORS.primary} /></View>
         </View>
         </EntranceView>
@@ -317,14 +317,14 @@ export default function ProfileScreen() {
           <EntranceView delay={100}>
           <View style={styles.identityCard}>
             <Svg width="100%" height="100%" style={StyleSheet.absoluteFillObject}>
-              <Defs><LinearGradient id="profileCover" x1="0" y1="0" x2="1" y2="1"><Stop offset="0%" stopColor="#315FE8" /><Stop offset="100%" stopColor="#7268D6" /></LinearGradient></Defs>
+              <Defs><LinearGradient id="profileCover" x1="0" y1="0" x2="1" y2="1"><Stop offset="0%" stopColor="#0A1430" /><Stop offset="50%" stopColor="#123B8F" /><Stop offset="100%" stopColor="#4138B4" /></LinearGradient></Defs>
               <Rect width="100%" height="100%" rx="28" fill="url(#profileCover)" />
-              <Circle cx="100%" cy="0%" r="100" fill="#FFFFFF" fillOpacity="0.10" />
-              <Circle cx="5%" cy="120%" r="87" fill="#A7DFF0" fillOpacity="0.14" />
+              <Circle cx="100%" cy="0%" r="112" fill="#4DE3FF" fillOpacity="0.13" />
+              <Circle cx="4%" cy="122%" r="94" fill="#7C9CFF" fillOpacity="0.15" />
             </Svg>
             <View style={styles.identityTop}>
-              <Text style={styles.identityEyebrow}>{!isAdministrator && profile?.role === 'teacher' ? 'TEACHER PROFILE' : 'SYNCRA IDENTITY'}</Text>
-              <View style={styles.identityMark}><Ionicons name="scan-outline" size={16} color="#FFFFFF" /></View>
+              <Text style={styles.identityEyebrow}>{!isAdministrator && profile?.role === 'teacher' ? 'TEACHER PROFILE' : 'ATOMYX IDENTITY'}</Text>
+              <View style={styles.identityMark}><Ionicons name="scan-outline" size={16} color={COLORS.champagne} /></View>
             </View>
             <View style={styles.profileHero}>
               <View style={styles.avatar}>
@@ -335,7 +335,7 @@ export default function ProfileScreen() {
             </View>
             <View style={styles.identityBottom}>
               <View style={styles.rolePill}><View style={styles.roleDot} /><Text style={styles.roleText}>{isAdministrator ? 'ADMIN' : profile?.role === 'teacher' ? 'TEACHER' : 'STUDENT'}</Text></View>
-              <Text style={styles.identityFooter}>{isAdministrator ? 'SYNCRA ADMINISTRATOR' : profile?.role === 'teacher' ? 'TEACHER ACCOUNT' : 'STUDENT ACCESS PASS'}</Text>
+              <Text style={styles.identityFooter}>{isAdministrator ? 'ATOMYX ADMINISTRATOR' : profile?.role === 'teacher' ? 'TEACHER ACCOUNT' : 'STUDENT ACCESS PASS'}</Text>
             </View>
             {isAdministrator ? (
               <View style={styles.adminIdentityBadge}>
@@ -444,7 +444,7 @@ export default function ProfileScreen() {
 
         {profile && <EntranceView delay={180}>
         <View style={styles.signOutSection}>
-          <View style={styles.securityNote}><Ionicons name="shield-checkmark-outline" size={17} color={COLORS.primary} /><Text style={styles.securityText}>Your account is protected by your SYNCRA sign-in.</Text></View>
+          <View style={styles.securityNote}><Ionicons name="shield-checkmark-outline" size={17} color={COLORS.primary} /><Text style={styles.securityText}>Your account is protected by your ATOMYX sign-in.</Text></View>
           <AppButton title={signingOut ? 'Signing Out...' : 'Sign Out'} icon="log-out-outline" onPress={handleSignOut} disabled={signingOut} />
         </View>
         </EntranceView>}
@@ -727,15 +727,16 @@ function StudentInsightsCard({ insights }: { insights: StudentAttendanceInsights
     <>
       <View style={styles.insightCard}>
         <View style={styles.sectionHeading}>
-          <View><Text style={styles.sectionEyebrow}>ATTENDANCE INSIGHTS</Text><Text style={styles.sectionTitle}>Your activity</Text></View>
-          <Ionicons name="analytics-outline" size={20} color={COLORS.primary} />
+          <View><Text style={[styles.sectionEyebrow, styles.panelEyebrow]}>ATTENDANCE INSIGHTS</Text><Text style={styles.sectionTitle}>Your activity</Text></View>
+          <Ionicons name="analytics-outline" size={20} color={COLORS.champagne} />
         </View>
+        <View style={styles.panelDivider} />
         <View style={styles.statsRow}>
           <StatTile label="Total" count={insights.total} icon="scan-outline" />
           <StatTile label="Present" count={insights.present} icon="checkmark-circle-outline" />
           <StatTile label="Late" count={insights.late} icon="time-outline" />
         </View>
-        {insights.recovered > 0 && <View style={styles.recoveredSummary}><Ionicons name="refresh-outline" size={15} color={COLORS.primary} /><Text style={styles.recoveredSummaryText}>{insights.recovered} recovered check-in{insights.recovered === 1 ? '' : 's'}</Text></View>}
+        {insights.recovered > 0 && <View style={styles.recoveredSummary}><Ionicons name="refresh-outline" size={15} color={COLORS.champagne} /><Text style={styles.recoveredSummaryText}>{insights.recovered} recovered check-in{insights.recovered === 1 ? '' : 's'}</Text></View>}
         <View style={styles.chartHeading}><Text style={styles.chartTitle}>Monthly activity</Text><Text style={styles.chartRange}>LAST 6 MONTHS</Text></View>
         {hasMonthlyActivity ? (
           <View style={styles.chart}>
@@ -753,14 +754,15 @@ function StudentInsightsCard({ insights }: { insights: StudentAttendanceInsights
       </View>
       <View style={styles.milestoneCard}>
         <View style={styles.sectionHeading}>
-          <View><Text style={styles.sectionEyebrow}>MILESTONES</Text><Text style={styles.sectionTitle}>Showing up adds up</Text></View>
-          <Ionicons name="ribbon-outline" size={20} color={COLORS.primary} />
+          <View><Text style={[styles.sectionEyebrow, styles.panelEyebrow]}>MILESTONES</Text><Text style={styles.sectionTitle}>Showing up adds up</Text></View>
+          <Ionicons name="ribbon-outline" size={20} color={COLORS.champagne} />
         </View>
-        {milestones.map((milestone) => {
+        <View style={styles.panelDivider} />
+        {milestones.map((milestone, index) => {
           const unlocked = insights.total >= milestone.count;
           return (
-            <View key={milestone.count} style={styles.milestoneRow}>
-              <View style={[styles.milestoneIcon, unlocked && styles.milestoneIconActive]}><Ionicons name={milestone.icon} size={17} color={unlocked ? COLORS.primary : COLORS.textMuted} /></View>
+            <View key={milestone.count} style={[styles.milestoneRow, index === 0 && styles.milestoneRowFirst]}>
+              <View style={[styles.milestoneIcon, unlocked && styles.milestoneIconActive]}><Ionicons name={milestone.icon} size={17} color={unlocked ? COLORS.champagne : COLORS.textMuted} /></View>
               <Text style={[styles.milestoneTitle, !unlocked && styles.milestoneTitleLocked]}>{milestone.title}</Text>
               <Ionicons name={unlocked ? 'checkmark-circle' : 'ellipse-outline'} size={18} color={unlocked ? COLORS.success : COLORS.textMuted} />
             </View>
@@ -774,7 +776,7 @@ function StudentInsightsCard({ insights }: { insights: StudentAttendanceInsights
 function StatTile({ label, count, icon }: { label: string; count: number; icon: keyof typeof Ionicons.glyphMap }) {
   return (
     <View style={styles.statTile}>
-      <Ionicons name={icon} size={16} color={COLORS.primary} />
+      <View style={styles.statIcon}><Ionicons name={icon} size={15} color={COLORS.champagne} /></View>
       <Text style={styles.statCount}>{count}</Text>
       <Text style={styles.statLabel}>{label}</Text>
     </View>
@@ -819,15 +821,15 @@ const styles = StyleSheet.create({
   headerIcon: { width: 48, height: 48, borderRadius: 24, backgroundColor: COLORS.glassStrong, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: COLORS.champagneBorder },
   loadingState: { alignItems: 'center', paddingVertical: SPACE.section },
   subtitle: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 16, lineHeight: 24, color: COLORS.textSecondary, marginTop: SPACE.sm },
-  identityCard: { backgroundColor: COLORS.primary, borderRadius: 28, padding: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,0.72)', overflow: 'hidden', shadowColor: COLORS.primary, shadowOpacity: 0.15, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 3 },
+  identityCard: { backgroundColor: '#0A1430', borderRadius: 28, padding: 20, borderWidth: 1, borderColor: 'rgba(124,221,255,0.40)', overflow: 'hidden', shadowColor: COLORS.champagne, shadowOpacity: 0.20, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 4 },
   identityTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 17 },
-  identityEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, letterSpacing: 0.2, color: '#FFFFFF' },
-  identityMark: { width: 31, height: 31, borderRadius: 11, backgroundColor: 'rgba(255,255,255,0.14)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.24)', alignItems: 'center', justifyContent: 'center' },
-  identityBottom: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 15, paddingTop: 13, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.20)' },
-  identityFooter: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, color: '#FFFFFF', letterSpacing: 0.2 },
-  adminIdentityBadge: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 14, paddingHorizontal: 11, minHeight: 30, borderRadius: RADIUS.pill, backgroundColor: 'rgba(20,15,44,0.28)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.40)' },
-  teacherIdentityBadge: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 14, paddingHorizontal: 11, minHeight: 30, borderRadius: RADIUS.pill, backgroundColor: 'rgba(86,221,245,0.16)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.40)' },
-  adminIdentityBadgeText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 11, letterSpacing: 0.7, color: '#FFFFFF' },
+  identityEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 12, letterSpacing: 1.4, color: '#BFF0FF' },
+  identityMark: { width: 32, height: 32, borderRadius: 11, backgroundColor: 'rgba(77,227,255,0.16)', borderWidth: 1, borderColor: 'rgba(124,221,255,0.45)', alignItems: 'center', justifyContent: 'center' },
+  identityBottom: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 18, paddingTop: 14, borderTopWidth: 1, borderTopColor: 'rgba(124,221,255,0.24)' },
+  identityFooter: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 11, color: 'rgba(214,240,255,0.82)', letterSpacing: 1.1 },
+  adminIdentityBadge: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 14, paddingHorizontal: 12, minHeight: 30, borderRadius: RADIUS.pill, backgroundColor: 'rgba(6,14,38,0.45)', borderWidth: 1, borderColor: 'rgba(124,221,255,0.38)' },
+  teacherIdentityBadge: { alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 14, paddingHorizontal: 12, minHeight: 30, borderRadius: RADIUS.pill, backgroundColor: 'rgba(77,227,255,0.16)', borderWidth: 1, borderColor: 'rgba(124,221,255,0.38)' },
+  adminIdentityBadgeText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 10, letterSpacing: 1, color: '#EAFBFF' },
   accountCard: { marginTop: 13, backgroundColor: COLORS.glassStrong, borderRadius: 26, padding: SPACE.lg, borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: COLORS.shadow, shadowOpacity: 0.10, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 2 },
   adminConsoleLink: { marginTop: 13, minHeight: 76, padding: 14, borderRadius: 21, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder, flexDirection: 'row', alignItems: 'center', gap: 12 },
   adminConsoleLinkIcon: { width: 40, height: 40, borderRadius: 14, backgroundColor: COLORS.primaryTint, alignItems: 'center', justifyContent: 'center' },
@@ -838,15 +840,15 @@ const styles = StyleSheet.create({
   accountEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, letterSpacing: 0.2, color: COLORS.primary },
   accountTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 20, color: COLORS.textPrimary, marginTop: 2 },
   profileHero: { flexDirection: 'row', alignItems: 'center' },
-  avatar: { width: 64, height: 64, borderRadius: 23, backgroundColor: 'rgba(255,255,255,0.17)', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.75)', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
-  avatarGlow: { ...StyleSheet.absoluteFillObject, borderRadius: 23, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.56)', backgroundColor: 'transparent' },
+  avatar: { width: 64, height: 64, borderRadius: 22, backgroundColor: 'rgba(77,227,255,0.15)', borderWidth: 1, borderColor: 'rgba(191,240,255,0.75)', alignItems: 'center', justifyContent: 'center', marginRight: 14 },
+  avatarGlow: { ...StyleSheet.absoluteFillObject, borderRadius: 22, borderWidth: 1, borderColor: 'rgba(191,240,255,0.55)', backgroundColor: 'transparent' },
   avatarText: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 25, color: '#FFFFFF' },
   profileCopy: { flex: 1 },
-  name: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 17, color: '#FFFFFF' },
-  email: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 15, lineHeight: 22, color: '#FFFFFF', marginTop: 4 },
-  rolePill: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10, minHeight: 38, borderRadius: RADIUS.pill, backgroundColor: 'rgba(255,255,255,0.20)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.45)' },
-  roleDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#7AE0C6', marginRight: 5 },
-  roleText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, letterSpacing: 0.2, color: '#FFFFFF' },
+  name: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 19, letterSpacing: -0.2, color: '#FFFFFF' },
+  email: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 14, lineHeight: 21, color: 'rgba(226,240,255,0.78)', marginTop: 4 },
+  rolePill: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 11, minHeight: 30, borderRadius: RADIUS.pill, backgroundColor: 'rgba(77,227,255,0.15)', borderWidth: 1, borderColor: 'rgba(124,221,255,0.45)' },
+  roleDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#4DE3FF', marginRight: 6 },
+  roleText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 11, letterSpacing: 0.9, color: '#EAFBFF' },
   divider: { height: 1, backgroundColor: COLORS.border, marginVertical: SPACE.lg },
   label: { ...TYPOGRAPHY.label, fontSize: 14, lineHeight: 20, fontFamily: TYPOGRAPHY.semiboldFontFamily, color: COLORS.textSecondary, marginBottom: 7, marginTop: SPACE.md },
   nameRow: { minHeight: 58, borderRadius: 24, backgroundColor: COLORS.pearl, borderWidth: 1, borderColor: COLORS.pearlBorder, paddingHorizontal: 14, flexDirection: 'row', alignItems: 'center' },
@@ -858,34 +860,38 @@ const styles = StyleSheet.create({
   readonlyRow: { minHeight: 58, borderRadius: 24, backgroundColor: COLORS.pearl, borderWidth: 1, borderColor: COLORS.pearlBorder, paddingHorizontal: 14, flexDirection: 'row', alignItems: 'center', gap: 10 },
   valueSmall: { flex: 1, fontFamily: TYPOGRAPHY.fontFamily, fontSize: 14, lineHeight: 21, color: COLORS.textSecondary },
   pressed: { transform: [{ scale: 0.98 }], opacity: 0.92 },
-  studentIdRow: { marginTop: 15, paddingTop: 13, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.20)', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
-  studentId: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 14, color: '#FFFFFF', marginTop: 4 },
-  copyButton: { minHeight: 46, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingHorizontal: 12, borderRadius: 23, backgroundColor: 'rgba(255,255,255,0.22)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.48)' },
-  copyButtonText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, color: '#FFFFFF' },
-  insightCard: { marginTop: 15, padding: SPACE.lg, borderRadius: 26, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: COLORS.glassBorder, shadowColor: COLORS.shadow, shadowOpacity: 0.09, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 2 },
-  milestoneCard: { marginTop: 13, padding: SPACE.lg, borderRadius: 26, backgroundColor: COLORS.glassStrong, borderWidth: 1, borderColor: COLORS.glassBorder },
+  studentIdRow: { marginTop: 16, paddingTop: 14, borderTopWidth: 1, borderTopColor: 'rgba(124,221,255,0.24)', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
+  studentId: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 13, color: '#FFFFFF', marginTop: 5, letterSpacing: 0.2 },
+  copyButton: { minHeight: 42, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingHorizontal: 14, borderRadius: 14, backgroundColor: 'rgba(77,227,255,0.16)', borderWidth: 1, borderColor: 'rgba(124,221,255,0.45)' },
+  copyButtonText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 13, color: '#FFFFFF' },
+  insightCard: { marginTop: 15, padding: SPACE.lg, borderRadius: 26, backgroundColor: COLORS.card, borderWidth: 1, borderColor: 'rgba(77,227,255,0.18)', borderTopColor: 'rgba(77,227,255,0.34)', shadowColor: COLORS.champagne, shadowOpacity: 0.10, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 3 },
+  milestoneCard: { marginTop: 13, padding: SPACE.lg, borderRadius: 26, backgroundColor: COLORS.card, borderWidth: 1, borderColor: 'rgba(77,227,255,0.18)', borderTopColor: 'rgba(77,227,255,0.34)', shadowColor: COLORS.violet, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: 8 }, elevation: 2 },
+  panelEyebrow: { color: COLORS.champagne },
+  panelDivider: { height: 1, backgroundColor: 'rgba(77,227,255,0.16)', marginTop: 16 },
   sectionHeading: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sectionEyebrow: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, letterSpacing: 0.2, color: COLORS.primary },
   sectionTitle: { fontFamily: TYPOGRAPHY.headingFontFamily, fontSize: 20, color: COLORS.textPrimary, marginTop: 3 },
-  statsRow: { flexDirection: 'row', gap: 8, marginTop: 16 },
-  statTile: { flex: 1, minHeight: 86, paddingVertical: 11, borderRadius: 18, backgroundColor: COLORS.primaryTint, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: COLORS.glassBorder },
-  statCount: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 20, color: COLORS.textPrimary, marginTop: 4 },
-  statLabel: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 14, color: COLORS.textPrimary, marginTop: 1 },
-  recoveredSummary: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 11, paddingHorizontal: 11, paddingVertical: 8, borderRadius: 13, backgroundColor: COLORS.primaryTint },
-  recoveredSummaryText: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 14, lineHeight: 20, color: COLORS.primary },
-  chartHeading: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 18, marginBottom: 6 },
+  statsRow: { flexDirection: 'row', gap: 10, marginTop: 14 },
+  statTile: { flex: 1, minHeight: 108, paddingVertical: 14, borderRadius: 20, backgroundColor: COLORS.cardRaised, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(77,227,255,0.18)', shadowColor: COLORS.champagne, shadowOpacity: 0.10, shadowRadius: 10, shadowOffset: { width: 0, height: 4 }, elevation: 1 },
+  statIcon: { width: 32, height: 32, borderRadius: 11, backgroundColor: COLORS.champagneSoft, borderWidth: 1, borderColor: 'rgba(77,227,255,0.32)', alignItems: 'center', justifyContent: 'center' },
+  statCount: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 23, letterSpacing: -0.4, color: COLORS.textPrimary, marginTop: 7 },
+  statLabel: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 12, letterSpacing: 0.3, color: COLORS.textSecondary, marginTop: 2 },
+  recoveredSummary: { flexDirection: 'row', alignItems: 'center', gap: 7, marginTop: 12, paddingHorizontal: 12, paddingVertical: 9, borderRadius: 14, backgroundColor: 'rgba(77,227,255,0.10)', borderWidth: 1, borderColor: 'rgba(77,227,255,0.24)' },
+  recoveredSummaryText: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 13, lineHeight: 19, color: COLORS.champagne },
+  chartHeading: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 20, marginBottom: 10 },
   chartTitle: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 16, color: COLORS.textPrimary },
-  chartRange: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 14, letterSpacing: 0.1, color: COLORS.textSecondary },
-  chart: { height: 108, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-around' },
+  chartRange: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 11, letterSpacing: 1, color: COLORS.champagne },
+  chart: { height: 124, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-around', backgroundColor: 'rgba(6,13,36,0.85)', borderRadius: 18, borderWidth: 1, borderColor: 'rgba(77,227,255,0.14)', paddingHorizontal: 6, paddingVertical: 8 },
   chartColumn: { flex: 1, alignItems: 'center', justifyContent: 'flex-end' },
-  chartCount: { minHeight: 20, fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 14, color: COLORS.textSecondary },
-  chartTrack: { height: 59, width: 19, borderRadius: 10, backgroundColor: '#EDF1FA', justifyContent: 'flex-end', overflow: 'hidden' },
-  chartBar: { width: '100%', borderRadius: 10, backgroundColor: COLORS.primary },
-  chartLabel: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 14, color: COLORS.textSecondary, marginTop: 5 },
+  chartCount: { minHeight: 18, fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 13, color: COLORS.primarySoft },
+  chartTrack: { height: 59, width: 22, borderRadius: 11, backgroundColor: 'rgba(46,155,255,0.13)', justifyContent: 'flex-end', overflow: 'hidden' },
+  chartBar: { width: '100%', borderRadius: 11, backgroundColor: COLORS.champagne },
+  chartLabel: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 12, letterSpacing: 0.2, color: COLORS.textSecondary, marginTop: 6 },
   chartEmpty: { marginTop: 4, paddingVertical: 8, fontFamily: TYPOGRAPHY.fontFamily, fontSize: 14, lineHeight: 20, color: COLORS.textSecondary },
-  milestoneRow: { minHeight: 47, flexDirection: 'row', alignItems: 'center', borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: 5, paddingTop: 5 },
-  milestoneIcon: { width: 32, height: 32, borderRadius: 12, backgroundColor: '#F0F2F8', alignItems: 'center', justifyContent: 'center', marginRight: 10 },
-  milestoneIconActive: { backgroundColor: COLORS.primaryTint },
+  milestoneRow: { minHeight: 54, flexDirection: 'row', alignItems: 'center', borderTopWidth: 1, borderTopColor: 'rgba(77,227,255,0.14)', marginTop: 4, paddingTop: 8, paddingBottom: 4 },
+  milestoneRowFirst: { marginTop: 12, paddingTop: 0, borderTopWidth: 0 },
+  milestoneIcon: { width: 34, height: 34, borderRadius: 12, backgroundColor: 'rgba(110,134,172,0.14)', borderWidth: 1, borderColor: 'rgba(77,227,255,0.14)', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
+  milestoneIconActive: { backgroundColor: COLORS.champagneSoft, borderColor: 'rgba(77,227,255,0.45)' },
   milestoneTitle: { flex: 1, fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 15, lineHeight: 21, color: COLORS.textPrimary },
   milestoneTitleLocked: { color: COLORS.textSecondary },
   teacherStats: { flexDirection: 'row', alignItems: 'center', marginTop: 15, minHeight: 72, borderRadius: 19, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: COLORS.glassBorder },
@@ -902,9 +908,9 @@ const styles = StyleSheet.create({
   teacherEventCount: { minWidth: 47, alignItems: 'center' },
   teacherEventCountText: { fontFamily: TYPOGRAPHY.numberFontFamily, fontSize: 14, color: COLORS.primary },
   teacherEventCountLabel: { fontFamily: TYPOGRAPHY.mediumFontFamily, fontSize: 14, color: COLORS.textSecondary },
-  teacherEmpty: { flexDirection: 'row', alignItems: 'center', gap: 9, marginTop: 12, padding: 12, borderRadius: 15, backgroundColor: '#F6F8FD' },
+  teacherEmpty: { flexDirection: 'row', alignItems: 'center', gap: 9, marginTop: 12, padding: 12, borderRadius: 15, backgroundColor: COLORS.pearlDeep },
   teacherEmptyText: { flex: 1, fontFamily: TYPOGRAPHY.fontFamily, fontSize: 15, lineHeight: 22, color: COLORS.textSecondary },
-  messageCard: { marginTop: 12, padding: 15, borderRadius: 18, backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center', gap: 8 },
+  messageCard: { marginTop: 12, padding: 15, borderRadius: 18, backgroundColor: COLORS.card, borderWidth: 1, borderColor: COLORS.glassBorder, alignItems: 'center', gap: 8 },
   messageText: { fontFamily: TYPOGRAPHY.fontFamily, fontSize: 15, lineHeight: 23, textAlign: 'center', color: COLORS.textPrimary },
   retryButton: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 14, backgroundColor: COLORS.primaryTint },
   retryText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 15, color: COLORS.primary },

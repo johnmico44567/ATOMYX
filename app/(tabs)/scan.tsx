@@ -11,9 +11,11 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import AppButton from '@/components/AppButton';
 import AmbientBackground from '@/components/AmbientBackground';
+import { AtomPrimary } from '@/components/AtomUI';
 import EntranceView from '@/components/EntranceView';
 import { COLORS, RADIUS, SPACE } from '@/constants/colors';
 import { TYPOGRAPHY } from '@/constants/typography';
+import { scan } from '@/components/ScanUI';
 
 const SCANNER_FRAME_SIZE = 278;
 const SCANNER_FRAME_RADIUS = 44;
@@ -111,14 +113,12 @@ export default function ScanScreen() {
 
   if (!permission.granted) {
     return (
-      <View style={styles.permissionContainer}>
+      <View style={[scan.shell, scan.gate]}>
         <AmbientBackground variant="compact" />
-        <View style={styles.permissionCard}>
-          <View style={styles.permissionIcon}><Ionicons name="scan-outline" size={30} color="#FFFFFF" /></View>
-          <Text style={styles.permissionTitle}>Camera access</Text>
-          <Text style={styles.permissionText}>Allow camera access so SYNCRA can read attendance QR codes.</Text>
-          <AppButton theme="primary" title="Grant Permission" icon="camera-outline" onPress={requestPermission} />
-        </View>
+        <View style={scan.gateTile}><Ionicons name="scan-outline" size={30} color={COLORS.cyan} /></View>
+        <Text style={scan.gateTitle}>Camera access</Text>
+        <Text style={scan.gateText}>Allow camera access so ATOMYX can read attendance QR codes.</Text>
+        <AtomPrimary title="Grant permission" icon="camera-outline" onPress={() => { void requestPermission(); }} />
       </View>
     );
   }
@@ -200,7 +200,7 @@ export default function ScanScreen() {
       <View style={styles.cameraShade} pointerEvents="none" />
 
       <View style={[styles.topBar, { paddingTop: insets.top + 8 }]} pointerEvents="none">
-        <View><Text style={styles.topEyebrow}>SYNCRA</Text><Text style={styles.topTitle}>Scan attendance</Text></View>
+        <View><Text style={styles.topEyebrow}>ATOMYX · CHECK-IN</Text><Text style={styles.topTitle}>Scan attendance</Text></View>
         <View style={styles.topBadge}><View style={styles.topDot} /><Text style={styles.topBadgeText}>LIVE</Text></View>
       </View>
 
@@ -231,7 +231,7 @@ export default function ScanScreen() {
           </View>
         </View>
 
-        {!scanned && <Text style={styles.overlayText}>Keep the QR inside the frame. SYNCRA will detect it automatically.</Text>}
+        {!scanned && <Text style={styles.overlayText}>Keep the QR inside the frame. ATOMYX will detect it automatically.</Text>}
         {scanned && message && <Text style={[styles.scanResult, success ? styles.success : styles.error]}>{message}</Text>}
         {scanned && pendingScan && lateReasonEnabled && !success && (
           <View style={styles.reasonPanel}>
@@ -256,13 +256,11 @@ export default function ScanScreen() {
 
 function PermissionState({ title, subtitle }: { title: string; subtitle: string }) {
   return (
-    <View style={styles.permissionContainer}>
+    <View style={[scan.shell, scan.gate]}>
       <AmbientBackground variant="compact" />
-      <View style={styles.permissionCard}>
-        <View style={styles.permissionIcon}><Ionicons name="camera-outline" size={30} color="#FFFFFF" /></View>
-        <Text style={styles.permissionTitle}>{title}</Text>
-        <Text style={styles.permissionText}>{subtitle}</Text>
-      </View>
+      <View style={scan.gateTile}><Ionicons name="camera-outline" size={30} color={COLORS.cyan} /></View>
+      <Text style={scan.gateTitle}>{title}</Text>
+      <Text style={scan.gateText}>{subtitle}</Text>
     </View>
   );
 }
@@ -270,28 +268,28 @@ function PermissionState({ title, subtitle }: { title: string; subtitle: string 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.background, overflow: 'hidden' },
   camera: { ...StyleSheet.absoluteFillObject },
-  cameraShade: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(9,12,52,0.30)' },
+  cameraShade: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(2,6,20,0.45)' },
   topBar: { position: 'absolute', top: 0, left: SPACE.lg, right: SPACE.lg, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   topEyebrow: { ...TYPOGRAPHY.label, fontFamily: TYPOGRAPHY.semiboldFontFamily, color: 'rgba(255,255,255,0.82)' },
   topTitle: { fontFamily: TYPOGRAPHY.displayFontFamily, fontSize: 20, color: '#FFFFFF', marginTop: 2 },
-  topBadge: { flexDirection: 'row', alignItems: 'center', height: 31, paddingHorizontal: 11, borderRadius: RADIUS.pill, backgroundColor: 'rgba(22,37,83,0.58)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.32)' },
-  topDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#5DE4B3', marginRight: 6 },
-  topBadgeText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 9, letterSpacing: 1, color: '#FFFFFF' },
+  topBadge: { flexDirection: 'row', alignItems: 'center', height: 31, paddingHorizontal: 11, borderRadius: RADIUS.pill, backgroundColor: 'rgba(3,8,24,0.75)', borderWidth: 1, borderColor: 'rgba(77,227,255,0.35)' },
+  topDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: COLORS.cyan, marginRight: 6 },
+  topBadgeText: { fontFamily: TYPOGRAPHY.semiboldFontFamily, fontSize: 9, letterSpacing: 1, color: COLORS.cyan },
   scannerStage: { position: 'absolute', width: SCANNER_FRAME_SIZE, height: SCANNER_FRAME_SIZE, top: '22%', alignSelf: 'center' },
   scannerPulse: { ...StyleSheet.absoluteFillObject, borderRadius: SCANNER_FRAME_RADIUS, borderWidth: 1.25, shadowOffset: { width: 0, height: 0 }, shadowRadius: 10, elevation: 2 },
-  scannerPulseCyan: { borderColor: 'rgba(151,191,255,0.82)', shadowColor: COLORS.primarySoft, shadowOpacity: 0.32 },
-  scannerPulseViolet: { borderColor: 'rgba(181,165,255,0.78)', shadowColor: COLORS.violet, shadowOpacity: 0.28 },
-  scanFrame: { width: '100%', height: '100%', borderRadius: SCANNER_FRAME_RADIUS, borderWidth: SCANNER_FRAME_BORDER_WIDTH, borderColor: 'rgba(188,207,255,0.32)', backgroundColor: 'rgba(255,255,255,0.035)', overflow: 'hidden', shadowColor: COLORS.primary, shadowOpacity: 0.24, shadowRadius: 30, shadowOffset: { width: 0, height: 0 }, elevation: 6 },
-  frameGlow: { ...StyleSheet.absoluteFillObject, borderRadius: SCANNER_FRAME_RADIUS, borderWidth: 1, borderColor: COLORS.primarySoft, backgroundColor: 'rgba(101,142,255,0.05)' },
-  frameCorner: { position: 'absolute', width: 52, height: 52, borderColor: '#9AB8FF', shadowColor: COLORS.primarySoft, shadowOpacity: 0.72, shadowRadius: 8, shadowOffset: { width: 0, height: 0 } },
+  scannerPulseCyan: { borderColor: 'rgba(77,227,255,0.82)', shadowColor: COLORS.cyan, shadowOpacity: 0.32 },
+  scannerPulseViolet: { borderColor: 'rgba(46,155,255,0.65)', shadowColor: COLORS.primary, shadowOpacity: 0.28 },
+  scanFrame: { width: '100%', height: '100%', borderRadius: SCANNER_FRAME_RADIUS, borderWidth: SCANNER_FRAME_BORDER_WIDTH, borderColor: 'rgba(77,227,255,0.32)', backgroundColor: 'rgba(2,6,20,0.20)', overflow: 'hidden', shadowColor: COLORS.cyan, shadowOpacity: 0.24, shadowRadius: 30, shadowOffset: { width: 0, height: 0 }, elevation: 6 },
+  frameGlow: { ...StyleSheet.absoluteFillObject, borderRadius: SCANNER_FRAME_RADIUS, borderWidth: 1, borderColor: COLORS.cyan, backgroundColor: 'rgba(77,227,255,0.05)' },
+  frameCorner: { position: 'absolute', width: 52, height: 52, borderColor: COLORS.cyan, shadowColor: COLORS.cyan, shadowOpacity: 0.72, shadowRadius: 8, shadowOffset: { width: 0, height: 0 } },
   frameTL: { top: -1, left: -1, borderTopWidth: 4, borderLeftWidth: 4, borderTopLeftRadius: 19 },
   frameTR: { top: -1, right: -1, borderTopWidth: 4, borderRightWidth: 4, borderTopRightRadius: 19 },
   frameBL: { bottom: -1, left: -1, borderBottomWidth: 4, borderLeftWidth: 4, borderBottomLeftRadius: 19 },
   frameBR: { bottom: -1, right: -1, borderBottomWidth: 4, borderRightWidth: 4, borderBottomRightRadius: 19 },
-  scanningLine: { position: 'absolute', top: SCANNER_FRAME_SIZE / 2 - SCANNING_LINE_HEIGHT / 2, left: 18, right: 18, height: SCANNING_LINE_HEIGHT, borderRadius: 3, backgroundColor: '#FFFFFF', shadowColor: '#FFFFFF', shadowOpacity: 0.65, shadowRadius: 8, shadowOffset: { width: 0, height: 0 } },
+  scanningLine: { position: 'absolute', top: SCANNER_FRAME_SIZE / 2 - SCANNING_LINE_HEIGHT / 2, left: 18, right: 18, height: SCANNING_LINE_HEIGHT, borderRadius: 3, backgroundColor: COLORS.cyan, shadowColor: COLORS.cyan, shadowOpacity: 0.8, shadowRadius: 8, shadowOffset: { width: 0, height: 0 } },
   frameCenter: { position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' },
   overlayPosition: { position: 'absolute', left: 12, right: 12, maxWidth: 540, alignSelf: 'center' },
-  overlay: { backgroundColor: '#FFFFFF', borderRadius: 30, padding: 18, borderWidth: 1, borderColor: 'rgba(255,255,255,0.9)', shadowColor: '#172852', shadowOpacity: 0.28, shadowRadius: 26, shadowOffset: { width: 0, height: 12 }, elevation: 9 },
+  overlay: { backgroundColor: 'rgba(10,20,46,0.96)', borderRadius: 26, padding: 18, borderWidth: 1, borderColor: 'rgba(77,227,255,0.24)', shadowColor: '#000000', shadowOpacity: 0.5, shadowRadius: 26, shadowOffset: { width: 0, height: 12 }, elevation: 9 },
   handle: { alignSelf: 'center', width: 42, height: 4, borderRadius: 4, backgroundColor: COLORS.border, marginBottom: 13 },
   overlayHeader: { flexDirection: 'row', alignItems: 'center' },
   overlayIcon: { width: 48, height: 48, borderRadius: 18, backgroundColor: COLORS.primaryTint, borderWidth: 1, borderColor: 'rgba(49,95,232,0.16)', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
